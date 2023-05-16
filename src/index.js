@@ -1,7 +1,11 @@
-import { keys } from '../libs/idb-keyval/index.js';
+import { keys, set } from '../libs/idb-keyval/index.js';
 const initialURL = "https://en.wiktionary.org/wiki/dominus";
 if (!await keyExists(initialURL)) {
-    harvestHTML(initialURL);
+    const div = await harvestHTML(initialURL);
+    await saveHTML(div, initialURL);
+}
+async function saveHTML(el, key) {
+    set(key, el.innerHTML);
 }
 function findLinks(html) {
     const el = document.createElement('div');
