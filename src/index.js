@@ -1,6 +1,6 @@
 import { keys } from '../libs/idb-keyval/index.js';
 const initialURL = "https://en.wiktionary.org/wiki/dominus";
-if (!keyExists(initialURL)) {
+if (!await keyExists(initialURL)) {
     harvestHTML(initialURL);
 }
 function findLinks(html) {
