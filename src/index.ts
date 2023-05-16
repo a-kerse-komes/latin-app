@@ -21,8 +21,8 @@ function findLinks(html:string){
 }
 
 function devURL(url:string){
-    if(window.location.host.includes("locahost")) return "https://cors-anywhere.herokuapp.com/"+url
-    return url
+   return "https://cors-anywhere.herokuapp.com/"+url
+  
 }
 async function harvestHTML(url:string){
 

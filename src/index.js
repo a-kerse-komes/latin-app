@@ -9,9 +9,7 @@ function findLinks(html) {
     el.querySelectorAll("a");
 }
 function devURL(url) {
-    if (window.location.host.includes("locahost"))
-        return "https://cors-anywhere.herokuapp.com/" + url;
-    return url;
+    return "https://cors-anywhere.herokuapp.com/" + url;
 }
 async function harvestHTML(url) {
     const data = await fetch(devURL(url), { headers: { "Access-Control-Allow-Origin": "*" } });
