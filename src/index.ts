@@ -2,13 +2,15 @@ import { some } from "../libs/fp-ts/Option.js"
 import { pipe } from "../libs/fp-ts/function.js"
 import { option as O } from "../libs/fp-ts/index.js"
 import { get, keys, set } from '../libs/idb-keyval/index.js';
-const tegst = 34
 
 
-console.log("tesdddt")
 
-const url = "https://en.wiktionary.org/wiki/dominus"
-const html = await get(url) as string
+
+
+const initialURL = "https://en.wiktionary.org/wiki/dominus"
+if(!keyExists(initialURL)){
+    harvestHTML(initialURL)
+}
 
 
 function findLinks(html:string){
@@ -18,9 +20,13 @@ function findLinks(html:string){
     
 }
 
+function devURL(url:string){
+    if(window.location.host.includes("locahost")) return "https://cors-anywhere.herokuapp.com/"+url
+    return url
+}
 async function harvestHTML(url:string){
 
-    const data = await fetch("https://cors-anywhere.herokuapp.com/"+url,{headers:{ "Access-Control-Allow-Origin": "*"}  })
+    const data = await fetch(devURL(url),{headers:{ "Access-Control-Allow-Origin": "*"}  })
     const text = await data.text()
     const el = document.createElement( 'html' );
     el.innerHTML = text
